@@ -1,0 +1,11 @@
+---
+- name: Downloading the Tomcat tar file
+  hosts: linux
+
+  tasks:
+  - name: From Apache Repository
+    unarchive:
+      src: https://dlcdn.apache.org/tomcat/tomcat-9/v9.0.54/bin/apache-tomcat-9.0.54.tar.gz
+      dest: /tmp/
+      remote_src: yes
+...
