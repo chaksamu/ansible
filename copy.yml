@@ -1,11 +1,31 @@
 ---
-- name: Copy Release Tar file from Local Server to Remote Server
-  hosts: linux
 
-  tasks:
-    - name: Copying file
-      copy:
-        src: release.tar.gz
-        dest: /tmp/
-        remote_src: yes
+-
+ hosts: linux
+ #user: allinone
+ gather_facts: True
+
+ vars:
+   centos_text: "Welcome to Ansible World, On Centos Server\n"
+   ubuntu_text: "Welcome to Ansible World, On Ubuntu Server\n"
+
+ tasks:
+   - name: Copy the file from local to centos server
+     copy:
+       content: "{{ centos_text }}"
+       dest: /tmp/testmessage
+     notify: TEXT changed
+     when: ansible_distribution == "CentOS"
+
+   - name: Copy the file from local to ubuntu server
+     copy:
+       content: "{{ ubuntu_text }}"
+       dest: /tmp/testmessage
+     notify: TEXT changed
+     when: ansible_distribution == "Ubuntu"
+
+ handlers:
+   - name: TEXT changed
+     debug:
+       msg: The TEXT was changed
 ...
