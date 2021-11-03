@@ -1,0 +1,28 @@
+---
+- name: upload the tar file
+  hosts: linux
+
+  tasks:
+    - name: upload the file from the local server
+      copy:
+        src: release.tar.gz
+        dest: /tmp
+      notify: TAR FILE LOADED
+      when: ansible_distribution == "Ubuntu"
+
+    - name: untar the tar file
+      unarchive:
+        src: /tmp/release.tar.gz
+        dest: /tmp
+        remote_src: yes
+      notify: UNTAR THE FILE SUCCES
+      when: ansible_distribution == "Ubuntu"
+
+  handlers:
+     - name: TAR FILE LOADED
+       debug:
+         msg: Succe Tested
+     - name: UNTAR THE FILE SUCCES
+       debug:
+         msg: Tested
+...
