@@ -7,4 +7,5 @@
       copy:
         src: release.tar.gz
         dest: /tmp/
+        remote_src: yes
 ...
