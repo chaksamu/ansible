@@ -1,0 +1,11 @@
+---
+- name: Downloading the tar file
+  hosts: linux
+
+  tasks:
+  - name: From Nexus Repository
+    unarchive:
+      src: https://nexusrm.syniverse.com/repository/syn-bms-repo/com/syniverse/ueg/att-bm-ueg/8.4.7536/att-bm-ueg-8.4.7536.tar.gz
+      dest: /tmp/
+      remote_src: yes
+...
